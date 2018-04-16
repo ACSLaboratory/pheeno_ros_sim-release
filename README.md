@@ -1,3 +1,26 @@
+## pheeno_ros_sim (kinetic) - 0.1.5-0
+
+The packages in the `pheeno_ros_sim` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release --rosdistro kinetic --track kinetic pheeno_ros_sim` on `Mon, 16 Apr 2018 22:57:39 -0000`
+
+The `pheeno_ros_sim` package was released.
+
+Version of package(s) in repository `pheeno_ros_sim`:
+
+- upstream repository: https://github.com/ACSLaboratory/pheeno_ros_sim.git
+- release repository: https://github.com/ACSLaboratory/pheeno_ros_sim-release.git
+- rosdistro version: `null`
+- old version: `0.1.4-0`
+- new version: `0.1.5-0`
+
+Versions of tools used:
+
+- bloom version: `0.6.4`
+- catkin_pkg version: `0.4.1`
+- rosdep version: `0.12.2`
+- rosdistro version: `0.6.8`
+- vcstools version: `0.1.40`
+
+
 ## pheeno_ros_sim (kinetic) - 0.1.4-0
 
 The packages in the `pheeno_ros_sim` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release pheeno_ros_sim --track kinetic --rosdistro kinetic` on `Sat, 30 Sep 2017 00:26:17 -0000`
