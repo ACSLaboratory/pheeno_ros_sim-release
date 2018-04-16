@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(pheeno_ros_sim)
 
+## Add support for C++11, supported in ROS Kinetic and newer
+add_compile_options(-std=c++11)
+
 
 find_package(catkin REQUIRED COMPONENTS
   actionlib
@@ -14,6 +17,8 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  nav_msgs
+  sensor_msgs
   message_generation
   gazebo_ros
   gazebo_ros_control
@@ -31,6 +36,7 @@ IF(PKG_CONFIG_FOUND)
   PKG_CHECK_MODULES(GAZEBO gazebo)
 ENDIF()
 
+FIND_PACKAGE(gazebo REQUIRED)
 INCLUDE_DIRECTORIES(${GAZEBO_INCLUDE_DIRS})
 LINK_DIRECTORIES(${GAZEBO_LIBRARY_DIRS})
 
@@ -64,6 +70,8 @@ generate_messages(
   actionlib_msgs
   geometry_msgs
   std_msgs
+  nav_msgs
+  sensor_msgs
 )
 
 
@@ -78,8 +86,8 @@ generate_messages(
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES pheeno_ros_sim
-  CATKIN_DEPENDS actionlib actionlib_msgs geometry_msgs roscpp rospy std_msgs message_runtime
-  DEPENDS system_lib
+  CATKIN_DEPENDS actionlib actionlib_msgs geometry_msgs roscpp rospy std_msgs nav_msgs sensor_msgs message_runtime
+  # DEPENDS system_lib
 )
 
 ###########
@@ -121,10 +129,10 @@ include_directories(
 ADD_LIBRARY(gazebo_ros_ir_sensor SHARED src/gazebo_ros_ir_sensor.cpp)
 TARGET_LINK_LIBRARIES(gazebo_ros_ir_sensor ${catkin_LIBRARIES} ${boost_LIBRARIES} ${GAZEBO_LIBRARIES} RayPlugin)
 
-ADD_EXECUTABLE(obstacle_avoidance_sim src/command_line_parser.cpp src/sensor_listener.cpp src/obstacle_avoidance.cpp)
+ADD_EXECUTABLE(obstacle_avoidance_sim src/command_line_parser.cpp src/pheeno_robot.cpp src/obstacle_avoidance.cpp)
 TARGET_LINK_LIBRARIES(obstacle_avoidance_sim ${catkin_LIBRARIES})
 
-ADD_EXECUTABLE(random_walk_sim src/command_line_parser.cpp src/random_walk.cpp)
+ADD_EXECUTABLE(random_walk_sim src/command_line_parser.cpp src/pheeno_robot.cpp src/random_walk.cpp)
 TARGET_LINK_LIBRARIES(random_walk_sim ${catkin_LIBRARIES})
 
 # all install targets should use catkin DESTINATION variables
